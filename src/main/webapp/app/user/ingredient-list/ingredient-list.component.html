@@ -1,0 +1,66 @@
+<div class="table-responsive">
+    <table class="table table-hover table-striped mt-3 ">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Amt</th>
+            <th scope="col">Unit</th>
+            <th scope="col">
+                <div class="text-end">
+                    <button (click)="removeAllIngredients()" class="btn btn-danger">
+                        <fa-icon icon="minus"></fa-icon>
+                    </button>
+                    <button *ngIf="isPurchasedList" (click)="undoAll()" type="button" class="btn btn-success">
+                        <fa-icon icon="undo"></fa-icon>
+                    </button>
+                    <button (click)="approveAll()" type="button" class="btn btn-success">
+                        <ng-container *ngIf="isShoppingPage(); else userIngredients">
+                            <fa-icon icon="tasks"></fa-icon>
+                        </ng-container>
+                        <ng-template #userIngredients>
+                            <fa-icon icon="shopping-basket"></fa-icon>
+                        </ng-template>
+                    </button>
+                </div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let ingredient of ingredients ; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td [class.text-decoration-line-through]=isPurchasedList>
+                {{ingredient.name}}
+            </td>
+            <td class="text-start" [class.text-decoration-line-through]=isPurchasedList>
+                {{ingredient.amount | number}}
+            </td>
+            <td class="text-start" [class.text-decoration-line-through]=isPurchasedList>
+                {{ingredient.unit | lowercase}}
+            </td>
+            <td class="text-nowrap text-end">
+                <ng-container *ngIf=!isPurchasedList>
+                    <button (click)="editIngredient(ingredient)" type="button" class="btn btn-outline-primary">
+                        <fa-icon icon="pencil-alt"></fa-icon>
+                    </button>
+                </ng-container>
+                <button (click)="removeIngredient(ingredient.id)" type="button"
+                        class="btn btn-outline-danger">
+                    <fa-icon icon="minus"></fa-icon>
+                </button>
+                <button *ngIf="isPurchasedList" (click)="undo(ingredient.id)" type="button" class="btn btn-outline-success">
+                    <fa-icon icon="undo"></fa-icon>
+                </button>
+                <button (click)="approve(ingredient.id)" type="button" class="btn btn-outline-success">
+                    <ng-container *ngIf="isShoppingPage(); else userIngredients">
+                            <fa-icon icon="check"></fa-icon>
+                    </ng-container>
+                    <ng-template #userIngredients>
+                        <fa-icon icon="shopping-basket"></fa-icon>
+                    </ng-template>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

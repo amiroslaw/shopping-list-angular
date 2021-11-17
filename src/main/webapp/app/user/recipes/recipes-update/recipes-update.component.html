@@ -1,0 +1,128 @@
+<h1>Create recipe</h1>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button
+                            type="submit"
+                            class="btn btn-success"
+                            [disabled]="!recipeForm.valid">Save
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="onNavigateToRecipeList()">Cancel</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input
+                                type="text"
+                                id="title"
+                                formControlName="title"
+                                class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="imgUrl">Image URL</label>
+                        <input
+                                type="text"
+                                id="imgUrl"
+                                formControlName="imgUrl"
+                                class="form-control"
+                                #imagePath>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 img-preview">
+                    <img [src]="imagePath.value"  alt="recipe preview">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea
+                                type="text"
+                                id="description"
+                                class="form-control"
+                                formControlName="description"
+                                rows="6"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <select formControlName="difficulty" class="form-select">
+                        <option value="EASY">Easy</option>
+                        <option selected value="MODERATE">Moderate</option>
+                        <option value="HARD">Hard</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <div class="form-check form-switch">
+                        <input formControlName="visible" class="form-check-input" type="checkbox" role="switch"
+                               id="visible"
+                               checked>
+                        <label class="form-check-label" for="visible">Visible for public list</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12" formArrayName="ingredients">
+                    <div
+                            class="row"
+                            *ngFor="let ingredient of getControls() ; let i = index"
+                            [formGroupName]="i"
+                            style="margin-top: 10px;">
+                        <div class="col-6">
+                            <input list="datalistOptions"
+                                   type="text"
+                                   class="form-control"
+                                   formControlName="name">
+                            <datalist id="datalistOptions">
+                                <option *ngFor="let ingredient of availableIngredients" [value]="ingredient">
+                            </datalist>
+                        </div>
+                        <div class="col-2">
+                            <input
+                                    type="number"
+                                    class="form-control"
+                                    formControlName="amount">
+                        </div>
+                        <div class="col-3">
+                            <select id="unit"  formControlName="unit" class="form-select" aria-label="Units of measure">
+                                <option *ngFor="let unit of availableUnits" [value]="unit" >{{unit}}</option>
+                            </select>
+
+                        </div>
+                        <div class="col-1">
+                            <button
+                                    type="button"
+                                    class="btn btn-danger"
+                                    (click)="onDeleteIngredient(i)">X
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            <button
+                                    type="button"
+                                    class="btn btn-success"
+                                    (click)="onAddIngredient()">Add Ingredient
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

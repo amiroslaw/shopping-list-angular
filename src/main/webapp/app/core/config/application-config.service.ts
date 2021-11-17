@@ -5,15 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class ApplicationConfigService {
   private endpointPrefix = '';
+  private API_VERSION = 'v1/'
 
   setEndpointPrefix(endpointPrefix: string): void {
-    this.endpointPrefix = endpointPrefix;
+    this.endpointPrefix = endpointPrefix + 'api/' + this.API_VERSION;
   }
 
-  getEndpointFor(api: string, microservice?: string): string {
-    if (microservice) {
-      return `${this.endpointPrefix}services/${microservice}/${api}`;
-    }
+  getEndpointFor(api: string): string {
     return `${this.endpointPrefix}${api}`;
   }
 }

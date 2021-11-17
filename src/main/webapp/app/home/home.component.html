@@ -1,54 +1,105 @@
 <div class="row">
-  <div class="col-md-3">
-    <span class="hipster img-fluid rounded"></span>
-  </div>
-
-  <div class="col-md-9">
-    <h1 class="display-4"><span>Welcome, Java Hipster!</span> (Shoppinglist)</h1>
-
-    <p class="lead">This is your homepage</p>
-
-    <div [ngSwitch]="account !== null">
-      <div class="alert alert-success" *ngSwitchCase="true">
-        <span id="home-logged-message" *ngIf="account">You are logged in as user "{{ account.login }}".</span>
-      </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span>If you want to </span>
-        <a class="alert-link" (click)="login()">sign in</a
-        ><span
-          >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
-          password="user").</span
-        >
-      </div>
-
-      <div class="alert alert-warning" *ngSwitchCase="false">
-        <span>You don't have an account yet?</span>&nbsp;
-        <a class="alert-link" routerLink="account/register">Register a new account</a>
-      </div>
+    <div class="col-md-3">
+        <span class="hipster img-fluid rounded"></span>
     </div>
 
-    <p>If you have any question on JHipster:</p>
+    <div class="col-md-9">
+        <h1 class="display-4">ShoppingList application</h1>
 
-    <ul>
-      <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">JHipster homepage</a></li>
-      <li>
-        <a href="https://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">JHipster on Stack Overflow</a>
-      </li>
-      <li>
-        <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer"
-          >JHipster bug tracker</a
-        >
-      </li>
-      <li>
-        <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">JHipster public chat room</a>
-      </li>
-      <li><a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">follow @jhipster on Twitter</a></li>
-    </ul>
+        <p class="lead">Welcome to the application that will help you organize your grocery list.</p>
 
-    <p>
-      <span>If you like JHipster, don't forget to give us a star on</span>
-      <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">GitHub</a>!
-    </p>
-  </div>
+        <div [ngSwitch]="account !== null">
+            <div class="alert alert-success" *ngSwitchCase="true">
+                <span id="home-logged-message" *ngIf="account">You are logged in as user "{{ account.login }}".</span>
+            </div>
+
+            <div class="alert alert-info" *ngSwitchCase="false">
+                <span>If you want to </span>
+                <a class="alert-link" (click)="login()">sign in</a><span>, you can try the default accounts:<br/>- Administrator (login="admin" and password="passff") <br/>- User (login="hulio" and
+          password="passff").</span>
+            </div>
+
+            <div class="alert alert-info" *ngSwitchCase="false">
+                <span>You don't have an account yet?</span>&nbsp;
+                <a class="alert-link" routerLink="account/register">Register a new account</a>
+            </div>
+
+        </div>
+        <div class="card-group">
+            <div class="card">
+                <img src="../../content/images/got-it.svg" class="card-img-top" alt="shared recipes">
+                <div class="card-body">
+                    <h5 class="card-title">Features</h5>
+                    <ul class="card-text">
+                        <li>Create a grocery list</li>
+                        <li>Manage purchased ingredients</li>
+                        <li>Create the recipes and share them with others</li>
+                        <li>Find a recipe that you can make from your purchased ingredients</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
+                <img src="../../content/images/shared.png" class="card-img-top" alt="shared recipes">
+                <div class="card-body">
+                    <a routerLink="/recipes">
+                        <h5 class="card-title">Shared recipes</h5>
+                    </a>
+                    <p class="card-text">On this page are all public recipes that you can copy (1.) into your list or
+                        assign all ingredients to the shopping list. </p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="../../content/images/my-recipes.png" class="card-img-top" alt="my recipes">
+                <div class="card-body">
+                    <a routerLink="/user-recipes">
+                        <h5 class="card-title">Recipes</h5>
+                    </a>
+                    <p class="card-text">
+                        This space allows you to manage and add your favorite recipes. Search recipe by name or find recommendations (1.). Recommendations are based on the ingredients you purchased.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-group">
+            <div class="card">
+                <img src="../../content/images/shoppinglist.png" class="card-img-top" alt="shopping list">
+                <div class="card-body">
+                    <a routerLink="/shopping-lists">
+                        <h5 class="card-title">Shopping list</h5>
+                    </a>
+                    <p class="card-text">In the grocery list are two lists - with ingredients that you want to buy and
+                        purchased ingredients. Available actions: </p>
+                    <ol>
+                        <li>edit an ingredient</li>
+                        <li>remove one or all from the shopping list</li>
+                        <li>move ingredients to the purchased list</li>
+                        <li>remove one or all from the purchased list</li>
+                        <li>move ingredients to the shopping list</li>
+                        <li>move ingredients to the bought list</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="card">
+                <img src="../../content/images/ingredients.png" class="card-img-top" alt="ingredients">
+                <div class="card-body">
+                    <a routerLink="/ingredients">
+                        <h5 class="card-title">Ingredients</h5>
+                    </a>
+                    <p class="card-text">It's your virtual fridge. To remove an ingredient click (2.) or (1.)
+                        for all of them, (3.) and (4.) moves all or one ingredient to the shopping list accordingly.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="../../content/images/grocery-bag.svg" class="card-img-top" alt="login">
+                <div class="card-body">
+                    <h5 class="card-title">Welcome :)</h5>
+                    <p class="card-text" *ngIf="account == null">
+                        <span>You don't have an account yet?</span>&nbsp;
+                        <a class="alert-link" routerLink="account/register">Register a new account</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>

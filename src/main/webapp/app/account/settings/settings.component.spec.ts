@@ -16,14 +16,11 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<SettingsComponent>;
     let mockAccountService: AccountService;
     const account: Account = {
-      firstName: 'John',
-      lastName: 'Doe',
       activated: true,
       email: 'john.doe@mail.com',
       langKey: 'en',
       login: 'john',
       authorities: [],
-      imageUrl: '',
     };
 
     beforeEach(

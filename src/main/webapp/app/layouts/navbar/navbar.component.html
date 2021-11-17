@@ -2,7 +2,6 @@
   <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
     <span class="logo-img"></span>
     <span class="navbar-title">Shoppinglist</span>
-    <span class="navbar-version">{{ version }}</span>
   </a>
   <a
     class="navbar-toggler d-lg-none"
@@ -26,25 +25,39 @@
           </span>
         </a>
       </li>
-      <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-      <li
-        *ngSwitchCase="true"
-        ngbDropdown
-        class="nav-item dropdown pointer"
-        display="dynamic"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
+      <li class="nav-item" >
+        <a class="nav-link" routerLink="/recipes" (click)="collapseNavbar()">
           <span>
-            <fa-icon icon="th-list"></fa-icon>
-            <span>Entities</span>
+            <fa-icon icon="utensils"></fa-icon>
+            <span>Recipes</span>
           </span>
         </a>
-        <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-          <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-        </ul>
       </li>
+      <li *ngSwitchCase="true" class="nav-item" >
+        <a class="nav-link" routerLink="/user-recipes" (click)="collapseNavbar()">
+          <span>
+            <fa-icon icon="heart"></fa-icon>
+            <span>My recipes</span>
+          </span>
+        </a>
+      </li>
+      <li *ngSwitchCase="true" class="nav-item" >
+        <a class="nav-link" routerLink="/shopping-lists" (click)="collapseNavbar()">
+          <span>
+            <fa-icon icon="shopping-basket"></fa-icon>
+            <span>Shopping List</span>
+          </span>
+        </a>
+      </li>
+      <li *ngSwitchCase="true" class="nav-item" >
+        <a class="nav-link" routerLink="/ingredients" (click)="collapseNavbar()">
+          <span>
+            <fa-icon icon="carrot"></fa-icon>
+            <span>Ingredients</span>
+          </span>
+        </a>
+      </li>
+
       <li
         *jhiHasAnyAuthority="'ROLE_ADMIN'"
         ngbDropdown
@@ -74,7 +87,7 @@
           </li>
           <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
           <li *ngIf="!inProduction">
-            <a class="dropdown-item" href="./h2-console/" target="_tab" (click)="collapseNavbar()">
+            <a class="dropdown-item" href="./console/" target="_tab" (click)="collapseNavbar()">
               <fa-icon icon="database" [fixedWidth]="true"></fa-icon>
               <span>Database</span>
             </a>
@@ -89,12 +102,9 @@
         [routerLinkActiveOptions]="{ exact: true }"
       >
         <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu" data-cy="accountMenu">
-          <span *ngIf="!account?.imageUrl">
+          <span>
             <fa-icon icon="user"></fa-icon>
             <span>Account</span>
-          </span>
-          <span *ngIf="account?.imageUrl">
-            <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
           </span>
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">

@@ -36,7 +36,7 @@ module.exports = (config, options, targetOptions) => {
       }),
       new WebpackNotifierPlugin({
         title: 'Shoppinglist',
-        contentImage: path.join(__dirname, 'logo-jhipster.png'),
+        contentImage: path.join(__dirname, 'sl-logo.svg'),
       })
     );
   }

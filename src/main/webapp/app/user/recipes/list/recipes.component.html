@@ -1,0 +1,96 @@
+<div *ngIf="!isPublic;else privateList">
+    <h1>My recipes</h1>
+</div>
+<ng-template #privateList>
+    <h1>Shared recipes</h1>
+</ng-template>
+
+<div class="row mb-3">
+    <div class="col-sm-6 offset-sm-1 ">
+        <form id="editForm" #form="ngForm" (ngSubmit)="onSearchRecipes(form.value)" class="row g-3">
+            <div class="form-floating">
+                <input #searchInput id="search" type="text" ngModel name="search" placeholder="Search"
+                       class="form-control" required>
+                <label for="search">Search</label>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-5 mt-2">
+        <button (click)="onClearFilter()" ngbTooltip="Clear" class="btn btn-lg btn-danger">
+            <fa-icon icon="times"></fa-icon>
+        </button>
+        <button *ngIf="isAuthenticated" (click)="onRecommend()" ngbTooltip="Recommend" class="btn btn-lg btn-info">
+            <fa-icon icon="carrot"></fa-icon>
+        </button>
+        <a *ngIf="!isPublic" [routerLink]="['update']" type="button" ngbTooltip="Add recipe"
+           class="btn btn-lg btn-primary">
+            <fa-icon icon="plus"></fa-icon>
+            Add
+        </a>
+    </div>
+</div>
+
+<div *ngIf="isRecommendationFilter" class="d-flex justify-content-center">Recommended recipes</div>
+<div class="row row-cols-1 row-cols-sm-3 row-cols-xl-5 g-0">
+    <div *ngFor="let recipe of recipes let i = index" class="card m-1 m-sm-0 m-xl-1">
+        <div class="col">
+            <div class="img-card">
+                <img [src]="recipe.imgUrl" class="card-img-top" [alt]="recipe.title">
+            </div>
+            <div class="d-flex px-1 mt-1">
+                <div class="badge flex-grow-1 p-3"
+                     [ngClass]="getDifficultyClass(recipe.difficulty)">{{recipe.difficulty}}</div>
+                <button *ngIf="isPublic && isAuthenticated" (click)="assignRecipe(recipe)" type="button"
+                        class="btn btn-outline-info"
+                        placement="top" ngbTooltip="Assign to your recipes">
+                    <fa-icon icon="plus"></fa-icon>
+                </button>
+                <ng-container *ngIf="!isPublic">
+                    <button (click)="editRecipe(recipe)" type="button" class="btn btn-outline-primary"
+                            placement="top" ngbTooltip="Edit recipe">
+                        <fa-icon icon="pencil-alt"></fa-icon>
+                    </button>
+                    <button (click)="deleteRecipe(recipe.id)" type="button" class="btn btn-outline-danger"
+                            placement="top" ngbTooltip="Delete recipe">
+                        <fa-icon icon="minus"></fa-icon>
+                    </button>
+                </ng-container>
+                <button *ngIf="isAuthenticated" (click)="addIngredientToShoppingList(recipe)" type="button"
+                        class="btn btn-outline-success"
+                        placement="top" ngbTooltip="Add ingredients to shopping list">
+                    <fa-icon icon="shopping-basket"></fa-icon>
+                </button>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{recipe.title}}
+                    <fa-icon *ngIf="!recipe.visible" icon="eye-slash"></fa-icon>
+                </h5>
+                <p class="card-text">{{recipe.description}}</p>
+                <button type="button" class="btn btn-outline-primary" (click)="collapse.toggle()"
+                        [attr.aria-expanded]="!isCollapsed[i]" aria-controls="collapseExample">
+                    Ingredients
+                </button>
+                <ul #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed[i]">
+                    <li *ngFor="let ingredient of recipe.ingredients">
+                        {{ingredient.name}}: {{ingredient.amount}} {{ingredient.unit | lowercase}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="recipes" class="mt-2">
+        <div class="d-flex justify-content-center">
+            <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+        </div>
+        <div class="d-flex justify-content-center">
+            <ngb-pagination
+                    [collectionSize]="totalItems"
+                    [(page)]="page"
+                    [pageSize]="itemsPerPage"
+                    [boundaryLinks]="true"
+                    (pageChange)="getRecipes(isRecommendationFilter)"
+            ></ngb-pagination>
+        </div>
+</div>

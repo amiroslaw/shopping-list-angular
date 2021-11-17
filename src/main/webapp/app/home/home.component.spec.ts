@@ -20,11 +20,8 @@ describe('Component Tests', () => {
       activated: true,
       authorities: [],
       email: '',
-      firstName: null,
       langKey: '',
-      lastName: null,
       login: 'login',
-      imageUrl: null,
     };
 
     beforeEach(

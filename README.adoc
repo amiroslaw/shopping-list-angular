@@ -1,0 +1,39 @@
+= Shopping List Angular
+
+Frontend for https://github.com/amiroslaw/shopping-list[Shopping-list].
+This web application helps to create meal plans, find recipes based on that meal, and organize grocery lists around those recipes and what you have in your fridge.
+
+.Features:
+* Creating a grocery list
+* Managing purchased ingredients
+* Create the recipes and share them with others
+* Finding a recipe that you can make from your purchased ingredients
+
+.Demo
+image::https://github.com/amiroslaw/repo-assets/raw/master/shoppinglist/demo.gif[demo]
+
+.Administration panel
+image::https://github.com/amiroslaw/repo-assets/raw/master/shoppinglist/administration.png[administration]
+
+=== Used technology
+This repository has only the frontend part. Backend is located in the https://github.com/amiroslaw/shopping-list[Shopping-list] repository.
+
+Angular, JWT, JHipster
+
+=== Development
+Before you can build this project, you must install and configure the following dependencies on your machine:
+
+[source,bash]
+----
+npm install
+----
+Npm is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by specifying a newer version in `package.json`. You can also run `npm update` and `npm install` to manage dependencies.
+
+Run the following command to start the angular application:
+
+[source,bash]
+----
+npm start
+----
+
+Navigate to http://localhost:9000 in your browser.

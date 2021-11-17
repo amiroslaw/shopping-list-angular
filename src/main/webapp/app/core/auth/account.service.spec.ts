@@ -18,11 +18,8 @@ function accountWithAuthorities(authorities: string[]): Account {
     activated: true,
     authorities,
     email: '',
-    firstName: '',
     langKey: '',
-    lastName: '',
     login: '',
-    imageUrl: '',
   };
 }
 
@@ -58,7 +55,7 @@ describe('Service Tests', () => {
 
         // WHEN
         service.save(account).subscribe();
-        const testRequest = httpMock.expectOne({ method: 'POST', url: applicationConfigService.getEndpointFor('api/account') });
+        const testRequest = httpMock.expectOne({ method: 'POST', url: applicationConfigService.getEndpointFor('account') });
         testRequest.flush({});
 
         // THEN

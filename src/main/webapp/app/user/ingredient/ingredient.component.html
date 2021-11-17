@@ -1,0 +1,12 @@
+<h1>My ingredients</h1>
+
+<jhi-ingredient-form (submitEmitter)="onSubmit($event)"  ></jhi-ingredient-form>
+
+<div *ngIf="ingredients">
+    <jhi-ingredient-list (ingredientEdited)=onEditIngredient($event)
+                         (ingredientRemoved)=onRemoveIngredient($event)
+                         (ingredientsRemoved)=onRemoveAllIngredient()
+                         (ingredientApproved)="onApprove($event)"
+                         (ingredientsApproved)="onApproveAll()"
+                         [ingredients]="ingredients"></jhi-ingredient-list>
+</div>

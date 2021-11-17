@@ -1,0 +1,24 @@
+<h1>Shopping list</h1>
+
+<jhi-ingredient-form (submitEmitter)="onSubmit($event)"></jhi-ingredient-form>
+
+<div *ngIf="ingredients">
+    <jhi-ingredient-list (ingredientEdited)=onEditIngredient($event)
+                         (ingredientRemoved)=onRemoveIngredient($event)
+                         (ingredientsRemoved)=onRemoveAllIngredient()
+                         (ingredientApproved)="onApprove($event)"
+                         (ingredientsApproved)="onApproveAll()"
+                         [ingredients]="ingredients"></jhi-ingredient-list>
+</div>
+
+<div>
+    <jhi-ingredient-list (ingredientRemoved)=onRemovePurchasedIngredient($event)
+                         (ingredientsRemoved)=onRemoveAllPurchasedIngredient()
+                         (ingredientsApproved)="onSendAllIngredientsToUserList()"
+                         (ingredientApproved)="onSendIngredientToUserList($event)"
+                         (ingredientsUndo)="onUndoPurchases()"
+                         (ingredientUndo)="onUndoPurchase($event)"
+                         [ingredients]="purchasedIngredients"
+                         [isPurchasedList]=true
+    ></jhi-ingredient-list>
+</div>
